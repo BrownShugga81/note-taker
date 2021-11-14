@@ -13,7 +13,7 @@ const notes = [];
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("develop/public"));
 
 
 app.get('/notes', (req, res) => {
@@ -33,22 +33,13 @@ app.get('/', (req, res) => {
 app.post("/api/notes", function(req, res) {
     const newNote = req.body;
     
-
-    notes.push(newNote);
-     
-    console.log('NOTE SAVED');
-    fs.writeFileSync('./develop/db/db.json', JSON.stringify(newNote), function(err) {
-        if (err) throw err;
-    });
+    
+    fs.writeFileSync('./develop/db/db.json', JSON.stringify(data), function(err) {
+            if (err) throw err;
+        });
+    res.json(data);    
 });
-
-
-
-
-
-
-
-
+    
 
 app.listen(PORT, function() {
     console.log("listening to PORT " + PORT);
