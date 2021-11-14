@@ -1,5 +1,5 @@
 const express = require("express");
-const { fstat } = require("fs");
+const fs  = require("fs");
 //const fs = require("fs");
 //const db = require("./develop/db/db.json");
 const path = require('path');
@@ -9,6 +9,7 @@ const db = require('./develop/db/db.json');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const notes = [];
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,11 +32,11 @@ app.get('/', (req, res) => {
 // post new note
 app.post("/api/notes", function(req, res) {
     const newNote = req.body;
-    for (var i=0; i < notes.length; i++);
     
+
     notes.push(newNote);
      
-    
+    console.log('NOTE SAVED');
     fs.writeFileSync('./develop/db/db.json', JSON.stringify(newNote), function(err) {
         if (err) throw err;
     });
