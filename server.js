@@ -30,14 +30,14 @@ app.get('/', (req, res) => {
 })
 
 // post new note
-app.post("/api/notes", function(req, res) {
+app.post("/api/notes", (req, res) => {
     const newNote = req.body;
     
-    
-    fs.writeFileSync('./develop/db/db.json', JSON.stringify(data), function(err) {
+    fs.writeFileSync('./develop/db/db.json', JSON.stringify(newNote), function(err) {
             if (err) throw err;
         });
-    res.json(data);    
+
+    res.json(newNote);    
 });
     
 

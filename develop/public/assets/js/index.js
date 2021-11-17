@@ -158,14 +158,13 @@ const renderNoteList = async (notes) => {
 
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi('No saved Notes', false));
-  }
-
+  }else{
   jsonNotes.forEach((note) => {
-    const li = createLi(note.title);
+     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
-
+    console.log(jsonNotes);
     noteListItems.push(li);
-  });
+  })};
 
   if (window.location.pathname === '/notes') {
     noteListItems.forEach((note) => noteList[0].append(note));
@@ -182,4 +181,4 @@ if (window.location.pathname === '/notes') {
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
-getAndRenderNotes()
+getAndRenderNotes();
