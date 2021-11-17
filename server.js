@@ -29,10 +29,11 @@ app.get('/', (req, res) => {
     
 })
 
-// post new note
+// post new note Had a lot of help from AskBcs
 app.post("/api/notes", (req, res) => {
+
     const newNote = req.body;
-    
+    console.log("postapi value: ",newNote);
     fs.writeFileSync('./develop/db/db.json', JSON.stringify(newNote), function(err) {
             if (err) throw err;
         });
