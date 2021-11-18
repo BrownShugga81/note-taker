@@ -31,14 +31,24 @@ app.get('/', (req, res) => {
 
 // post new note Had a lot of help from AskBcs
 app.post("/api/notes", (req, res) => {
-
     const newNote = req.body;
-    console.log("postapi value: ",newNote);
-    fs.writeFileSync('./develop/db/db.json', JSON.stringify(newNote), function(err) {
-            if (err) throw err;
-        });
 
-    res.json(newNote);    
+    fs.readFile('./develop/db/db.json', data => {
+        dbNote = JSON.parse(data);
+        dbNote.push(newNote);
+        let id = 1;
+        dbNote.forEach((note, index) => {
+            note.id = id;
+            id++;
+            return dbNote;
+        });
+        console.log("postapi value: ",newNote);
+        fs.writeFileSync('./develop/db/db.json', JSON.stringify(newNote), function(err) {
+                if (err) throw err;
+            });
+    
+        res.json(newNote);
+    })
 });
     
 
