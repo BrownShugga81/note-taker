@@ -33,20 +33,20 @@ app.get('/', (req, res) => {
 app.post("/api/notes", (req, res) => {
     const newNote = req.body;
 
-    fs.readFile(path.join(__dirname, 'develop', 'db', 'db.json'), data => {
-        dbNote = JSON.parse(data);
+    //db declared at line 8
+        dbNote = db;
         dbNote.push(newNote);
         dbNote.forEach((note, index) => {
             note.id = index;
             return dbNote;
         });
         console.log("postapi value: ",newNote);
-        fs.writeFileSync(path.join(__dirname, 'develop', 'db', 'db.json'), JSON.stringify(dbNote), function(err) {
+        fs.writeFileSync(path.join(__dirname, 'develop', 'db', 'db.json'), JSON.stringify(db), function(err) {
                 if (err) throw err;
             });
     
         res.json(newNote);
-    })
+    
 });
 
 app.delete('/api/notes/:id', (req, res) => {
