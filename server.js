@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 app.post("/api/notes", (req, res) => {
     const newNote = req.body;
 
-    fs.readFile(path.join(__dirname, './develop/db/db.json'), data => {
+    fs.readFile(path.join(__dirname, 'develop', 'db', 'db.json'), data => {
         dbNote = JSON.parse(data);
         dbNote.push(newNote);
         dbNote.forEach((note, index) => {
@@ -41,7 +41,7 @@ app.post("/api/notes", (req, res) => {
             return dbNote;
         });
         console.log("postapi value: ",newNote);
-        fs.writeFileSync(path.join(__dirname, './develop/db/db.json'), JSON.stringify(dbNote), function(err) {
+        fs.writeFileSync(path.join(__dirname, 'develop', 'db', 'db.json'), JSON.stringify(dbNote), function(err) {
                 if (err) throw err;
             });
     
@@ -52,7 +52,7 @@ app.post("/api/notes", (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
     
 })
-    
+
 
 app.listen(PORT, function() {
     console.log("listening to PORT " + PORT);
